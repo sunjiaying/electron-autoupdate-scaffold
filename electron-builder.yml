@@ -1,0 +1,35 @@
+appId: 'com.marisfrolg.ods-cli' # 应用ID
+productName: 'ODS-CLI' # 打包完成后的应用名称
+artifactName: '${productName}-setup-${os}-${arch}-${version}.${ext}' # 应用最终的名称
+npmRebuild: false # 是否在开始编译前重构原生依赖,可先尝试true, 如果出现问题再修改为false,
+copyright: 'Copyright © 2019 Marisfrolg'
+compression: 'maximum'
+
+win:
+  target:
+    target: nsis-web
+    arch: 
+      - 'x64'
+      - 'ia32'
+  icon: './build/icons/icon.ico'
+  files: 
+    - '!dist/*'
+    - '!server/*'
+
+nsis:  
+  oneClick: true # 是否一键安装(静默安装)
+  perMachine: true
+  allowElevation: true
+  allowToChangeInstallationDirectory: false
+  installerIcon: './build/icons/icon.ico'
+  uninstallerIcon: './build/icons/icon.ico'
+  installerHeaderIcon: './build/icons/icon.ico'
+  createDesktopShortcut: true # 创建桌面快捷方式
+  createStartMenuShortcut: true # 创建开始菜单快捷方式
+  shortcutName: 'ODS-CLI'
+  # include: build/installer.nsh # 是否有额外的自定义安装需求,
+  # runAfterFinish: true # 安装完成后是否勾选立即执行
+
+nsisWeb:
+  appPackageUrl: 'http://127.0.0.1:8080' # 这里好像还有一些问题，需要后续找资料解决
+  artifactName: '${productName}-websetup-${os}-${arch}-${version}.${ext}'

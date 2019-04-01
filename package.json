@@ -1,0 +1,59 @@
+{
+  "name": "electron-autoupdate-scaffold",
+  "version": "1.0.11",
+  "description": "Windows 下支持自动更新的 Electron 应用脚手架",
+  "main": "main.js",
+  "build": {
+    "productName": "ODS-CLI",
+    "appId": "com.marisfrolg.ods-cli", 
+    "artifactName": "${productName}-setup-${os}-${arch}-${version}.${ext}",
+    "copyright": "Copyright © 2019 Marisfrolg",
+    "compression": "maximum",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "./build/icons/icon.ico",
+      "files": ["!dist/*", "!server/*"]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": false,
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico",
+      "installerHeaderIcon": "./build/icons/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "ODS-CLI"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      }
+    ]
+  },
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "release:win": "electron-builder --win",
+    "release:web": "electron-builder --win --config electron-builder.yml"
+  },
+  "author": "sunjiaying",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.1.3",
+    "electron-builder": "^20.39.0"
+  },
+  "dependencies": {
+    "electron-updater": "^4.0.6"
+  }
+}
